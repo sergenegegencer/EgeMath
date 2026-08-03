@@ -4,56 +4,98 @@
 
 class LifetimeProbe
 {
+    private:
+        inline static int nextID { 0 };
+        //static, bir degiskeni bildirir ama ayri bir yerde tanımlamak gerekir
+        //inline static ise header icinde degiskeni bildirip ayrica tanimlanabilir
+        int id;
+
     public:
-        LifetimeProbe()
+        LifetimeProbe() : id(nextID++)
         {
-            std::cout << "Constructor\n";
+            std::cout << "Constructor: " << id << '\n';
         }
 
-        LifetimeProbe(const LifetimeProbe& other)
+        LifetimeProbe(int _id) : id(_id)
         {
-            std::cout << "Copy Constructor\n";
+            std::cout << "Constructor: " << id << '\n';
+        }
+
+        LifetimeProbe(const LifetimeProbe& other) : id(nextID++)
+        {
+            std::cout << "Copy Constructor: " << id << '\n';
         }
 
         LifetimeProbe& operator=(const LifetimeProbe& other)
         {
-            std::cout << "Copy Assignment\n";
+            if(this == &other) return *this;
+
+            std::cout << "Copy Assignment: " << id << '\n';
 
             return *this;
         }
 
-        LifetimeProbe(LifetimeProbe&&) //&& = rvalue reference
+        LifetimeProbe(LifetimeProbe&& other) : id(nextID++) //&& = rvalue reference
         {
-            std::cout << "Move Constructor\n";
+            std::cout << "Move Constructor: " << id << " from " << other.id << '\n';
         }
 
         // && kullaninca parametrenin turu rvalue reference olur. 
         // Bu, fonksiyona gelen objenin kaynaklarinin tasinmasina izin verilebilecegini belirtir.
 
-        LifetimeProbe& operator=(LifetimeProbe&&) 
+        LifetimeProbe& operator=(LifetimeProbe&& other) 
         {
-            std::cout << "Move Assignment\n";
+            std::cout << "Move Assignment: " << id << " from " << other.id << '\n';
 
             return *this;
         }
 
         ~LifetimeProbe()
         {
-            std::cout << "Destructor\n";
+            std::cout << "Destructor: " << id << '\n';
+            nextID--;
         }
 };
+
+void passByValue(LifetimeProbe obj)
+{
+    std::cout << "Inside passByValue\n";
+}
+
+void passByReference(LifetimeProbe& obj)
+{
+    std::cout << "Inside passByReference\n";
+}
+
+void passByConstReference(const LifetimeProbe& obj)
+{
+    std::cout << "Inside passByConstReference\n";
+}
 
 int main()
 {
     LifetimeProbe a;
 
-    LifetimeProbe b = a;
+    std::cout << "\n--- Pass by value ---\n";
+    passByValue(a);
 
-    LifetimeProbe c = std::move(a);
+    std::cout << "\n--- Pass by reference ---\n";
+    passByReference(a);
 
-    b = c;
+    std::cout << "\n--- Pass by const reference ---\n";
+    passByConstReference(a);
 
-    c = std::move(b);
+
+    std::cout << "\n\n\n--- Move construction ---\n";
+
+    LifetimeProbe b = std::move(a);
+
+    LifetimeProbe x;
+    LifetimeProbe y;
+
+    y = x;
+
+    y = std::move(x);
 
     return 0;
 }
