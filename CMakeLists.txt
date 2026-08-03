@@ -12,3 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_executable(EgeMathSandbox
     sandbox/main.cpp
 )
+
+add_executable(LifetimeProbe
+    tests/LifetimeProbe.cpp
+)
