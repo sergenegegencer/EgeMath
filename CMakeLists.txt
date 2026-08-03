@@ -9,10 +9,27 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+add_library(EgeMath
+    src/Vec2.cpp
+)
+
+target_include_directories(EgeMath
+    PUBLIC
+        $(PROJECT_SOURCE_DIR)/include
+)
+
 add_executable(EgeMathSandbox
     sandbox/main.cpp
 )
 
 add_executable(LifetimeProbe
     tests/LifetimeProbe.cpp
+)
+
+add_executable(Vec2Test
+    tests/Vec2Test.cpp
+)
+
+target_link_libraries(Vec2Test
+    EgeMath
 )

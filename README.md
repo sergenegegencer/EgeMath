@@ -11,9 +11,27 @@ The main goal of this project is to build a lightweight, understandable math lib
 - Build reusable components for physics simulations
 - Understand low-level details behind game engine mathematics
 
+## Current Status
+
+Implemented:
+
+- Vec2 core mathematical type
+- Vector arithmetic operations
+- Scalar multiplication and division
+- Compound assignment operators
+- Length and squared length calculations
+- Basic unit tests using assertions
+
+Example:
+
+```cpp
+EgeMath::Vec2 velocity(10.0f, 5.0f);
+EgeMath::Vec2 displacement = velocity * deltaTime;
+```
+
 ## Planned Features
 
-- Vector2 / Vector3
+- Vec3
 - Matrix operations
 - Transform utilities
 - Interpolation functions
@@ -27,10 +45,12 @@ The main goal of this project is to build a lightweight, understandable math lib
 
 ## Project Structure
 
-- include/ Public headers
-- src/ Source files
-- tests/ Test programs
-- sandbox/ Experimental programs
+```
+include/    Public headers
+src/        Source files
+tests/      Test programs
+sandbox/    Experimental programs
+```
 
 ## License
 
