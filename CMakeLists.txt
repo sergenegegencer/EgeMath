@@ -30,6 +30,15 @@ add_executable(Vec2Test
     tests/Vec2Test.cpp
 )
 
+add_executable(VectorStorageProbe
+    tests/VectorStorageProbe.cpp
+)
+
 target_link_libraries(Vec2Test
     EgeMath
+)
+
+target_link_libraries(VectorStorageProbe
+    PRIVATE
+        EgeMath
 )
