@@ -86,6 +86,25 @@ int main()
     assert(std::isnan(invalid.x));
     assert(std::isnan(invalid.y));
 
+    // Aynı yön
+    Vec2 a{1.0f, 0.0f};
+    Vec2 b{3.0f, 0.0f};
+
+    assert(a.Dot(b) == 3.0f);
+
+    // Dik
+    Vec2 c{1.0f, 0.0f};
+    Vec2 d{0.0f, 4.0f};
+
+    assert(c.Dot(d) == 0.0f);
+
+    // Zıt yön
+    Vec2 e{1.0f, 0.0f};
+    Vec2 f{-2.0f, 0.0f};
+
+    assert(e.Dot(f) == -2.0f);
+
+    assert(a.Dot(b) == b.Dot(a));
 
     std::cout << "All Vec2 tests passed!\n";
 

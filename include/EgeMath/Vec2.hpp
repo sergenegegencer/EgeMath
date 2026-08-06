@@ -20,5 +20,7 @@ namespace EgeMath
 
         float lengthSquared() const;
         float length() const;
+
+        float Dot(const Vec2& other) const;
     };
 }
