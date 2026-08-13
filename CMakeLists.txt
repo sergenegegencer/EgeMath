@@ -39,6 +39,10 @@ add_executable(MathTests
     tests/MathTests.cpp
 )
 
+add_executable(ParticleKinematics
+    sandbox/ParticleKinematics.cpp
+)
+
 target_link_libraries(Vec2Test
     EgeMath
 )
@@ -49,6 +53,11 @@ target_link_libraries(VectorStorageProbe
 )
 
 target_link_libraries(MathTests
+    PRIVATE
+        EgeMath
+)
+
+target_link_libraries(ParticleKinematics
     PRIVATE
         EgeMath
 )
