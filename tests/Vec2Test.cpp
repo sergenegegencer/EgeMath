@@ -2,9 +2,15 @@
 #include <cmath>
 #include <iostream>
 
+#include <EgeMath/Math.hpp>
 #include <EgeMath/Vec2.hpp>
 
 using namespace EgeMath;
+
+bool ApproximatelyEqual(float a, float b, float epsilon = 0.0001f)
+{
+    return EgeMath::fabs(a - b) < epsilon;
+}
 
 int main()
 {
@@ -105,6 +111,23 @@ int main()
     assert(e.Dot(f) == -2.0f);
 
     assert(a.Dot(b) == b.Dot(a));
+
+
+    // Normalized test
+    Vec2 normalized = v1.Normalized();
+
+    assert(ApproximatelyEqual(normalized.x, 0.6f));
+    assert(ApproximatelyEqual(normalized.y, 0.8f));
+
+    // Normalized vector should have length 1
+    assert(ApproximatelyEqual(normalized.length(), 1.0f));
+
+    // Zero vector normalization test
+    Vec2 zero{0.0f, 0.0f};
+    Vec2 normalizedZero = zero.Normalized();
+
+    assert(normalizedZero.x == 0.0f);
+    assert(normalizedZero.y == 0.0f);
 
     std::cout << "All Vec2 tests passed!\n";
 

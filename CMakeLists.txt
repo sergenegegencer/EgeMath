@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(EgeMath
+    src/Math.cpp
     src/Vec2.cpp
 )
 
@@ -34,11 +35,20 @@ add_executable(VectorStorageProbe
     tests/VectorStorageProbe.cpp
 )
 
+add_executable(MathTests
+    tests/MathTests.cpp
+)
+
 target_link_libraries(Vec2Test
     EgeMath
 )
 
 target_link_libraries(VectorStorageProbe
+    PRIVATE
+        EgeMath
+)
+
+target_link_libraries(MathTests
     PRIVATE
         EgeMath
 )

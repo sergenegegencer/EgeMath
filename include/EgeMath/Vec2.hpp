@@ -22,5 +22,7 @@ namespace EgeMath
         float length() const;
 
         float Dot(const Vec2& other) const;
+
+        Vec2 Normalized() const;
     };
 }

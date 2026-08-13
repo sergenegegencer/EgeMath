@@ -1,5 +1,5 @@
 #include <EgeMath/Vec2.hpp>
-#include <cmath>
+#include <EgeMath/Math.hpp>
 #include <limits>
 
 namespace EgeMath
@@ -64,11 +64,17 @@ namespace EgeMath
 
     float Vec2::length() const
     {
-        return std::sqrt(x * x + y * y);
+        return EgeMath::sqrt(x * x + y * y);
     }
 
     float Vec2::Dot(const Vec2& other) const
     {
         return x * other.x + y * other.y;
+    }
+
+    Vec2 Vec2::Normalized() const
+    {
+        if(lengthSquared() == 0.0f) return Vec2(0.0f, 0.0f);
+        return *this / length();
     }
 }
